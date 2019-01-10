@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\View;
+use App\Category;
+use App\NewModel;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,6 +18,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        view::composer('frontend.layout.index', function ($view) {
+            $categories = Category::all();
+            $news = NewModel::where('hot_new', 1)->orderBy('id', 'desc')->take(6)->get();
+            $listNew = NewModel::where('hot_new', 1)->orderBy('id', 'desc')->paginate(4);
+            $view->with('categories', $categories);
+            $view->with('news', $news);
+            $view->with('listNew', $listNew);
+        });
     }
 
     /**

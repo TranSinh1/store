@@ -9,6 +9,6 @@ class NewEloquentRepository extends EloquentRepository implements NewRepositoryI
 {
 	public function getModel()
 	{
-		return \App\New::class;
+		return \App\NewModel::class;
 	}
 }
