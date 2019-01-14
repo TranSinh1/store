@@ -14,6 +14,13 @@
 Route::get('/', function () {
     return view('frontend.layout.index');
 });
-Route::get('home', function() {
-	return view('frontend.homepage');
-});
+
+Route::get('home', 'HomeController@homePage')->name('home');
+
+Route::get('category/{id}', 'HomeController@category')->name('category');
+
+Route::get('product-detail/{id}', 'HomeController@productDetail')->name('product');
+
+Route::get('new', 'HomeController@new')->name('new');
+
+Route::get('new-detail/{id}', 'HomeController@newDetail')->name('new.detail');

@@ -8,7 +8,7 @@ class Category extends Model
 {
     protected $guarded = ['id'];
 
-    public function Product()
+    public function product()
     {
     	return $this->hasMany('App\Product', 'category_id');
     }

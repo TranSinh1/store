@@ -15,6 +15,11 @@ abstract class EloquentRepository implements RepositoryInterface
 		);
 	}
 
+	public function model()
+	{
+		return $this->_model;
+	}
+
 	public function getAll()
 	{
 		return $this->_model->all();
