@@ -1,3 +1,9 @@
+<?php 
+    $totalItem = 0;
+    foreach($cart as $c){
+        $totalItem += $c['quantity'];
+    }
+ ?>
 <!-- header -->
 <header id="header"> 
   <!-- top header -->
@@ -22,16 +28,28 @@
           </form>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-3 mini-cart">
-          <div class="wrapper-mini-cart"> <span class="icon"><i class="fa fa-shopping-cart"></i></span> <a href="cart"> <span class="mini-cart-count">0</span> sản phẩm <i class="fa fa-caret-down"></i></a>
+          <div class="wrapper-mini-cart"> <span class="icon"><i class="fa fa-shopping-cart"></i></span> <a href="cart"> <span class="mini-cart-count" id="mini-cart">{{$totalItem}}</span> sản phẩm <i class="fa fa-caret-down"></i></a>
             <div class="content-mini-cart">
-              <div class="has-items">
-                <ul class="list-unstyled">
+                <ul class="list-unstyled list-cart-mini">
+                @php
+                    $totalPrice = 0;
+                @endphp
+                @foreach ($cart as $item)
+                  @php
+                        $totalPrice += ($item['quantity']*$item['price'])
+                  @endphp
+                  <li class="clearfix" id="item-1853038">
+                    <div class="image"> <a href="#"> <img alt="Sản phẩm 2" src="{{$item['image']}}" title="Sản phẩm 2" class="img-responsive"> </a> </div>
+                    <div class="info" id="item-cart">
+                      <h3><a href="#">{{$item['name']}}</a></h3>
+                      <p>{{$item['quantity']}} x @php echo number_format($item['price'])." ₫"; @endphp</p>
+                    </div>
+                    <div> <a href="javascript:;"> <i  class="del-product fa fa-times" item_id={{$item['id']}}></i></a> </div>
+                  </li>
+                @endforeach
                 </ul>
-                <div class="total clearfix"> <span class="pull-left">Tổng tiền:</span> <span class="pull-right total-price">0₫</span> </div>
-                <a href="checkout" class="button">Thanh toán</a> </div>
-              <div class="no-item">
-                <p style="text-align:left">Không có sản phẩm nào trong giỏ hàng của bạn.</p>
-              </div>
+                <div class="total clearfix"> <span class="pull-left">Tổng tiền:</span> <span class="pull-right total-price">@php echo number_format($totalPrice)." ₫"; @endphp</span> </div>
+                <a href="checkout" class="button">Thanh toán</a>
             </div>
           </div>
         </div>

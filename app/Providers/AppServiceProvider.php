@@ -22,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
             $categories = Category::all();
             $news = NewModel::where('hot_new', 1)->orderBy('id', 'desc')->take(6)->get();
             $listNew = NewModel::where('hot_new', 1)->orderBy('id', 'desc')->paginate(4);
+            $cart = session()->has('cart') == true ? session('cart') : [];
+            $view->with('cart', $cart);
             $view->with('categories', $categories);
             $view->with('news', $news);
             $view->with('listNew', $listNew);

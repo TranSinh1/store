@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Repositories\Product\ProductRepositoryInterface;
 use App\Repositories\NewRepository\NewRepositoryInterface;
+use  Illuminate\Support\Collection;
 
 class HomeController extends Controller
 {
@@ -64,5 +65,67 @@ class HomeController extends Controller
         }
 
         return view('frontend.new-detail', compact('new'));
+    }
+
+    public function addCart(Request $request)
+    {
+        $item = $this->productRepository->find($request->id);
+        if(!$item) {
+            return "404 notfound!";
+        }
+        //check xem co gio hang hay chua
+        // chua co => tao moi
+        $cart = session()->has('cart') == true ? session('cart') : [];
+        $flag = -1;
+        // kiem tra san pham xem co trong gio hang hay chua
+        foreach ($cart as $key => $val) {
+            if($val['id'] === $item->id)
+            {
+                $flag = $key;
+                break;
+            }
+        }
+        // 1 - chua co => chuyen $item => mang | add quantity = 1
+        if($flag === -1) {
+            $item->quantity = 1;
+            array_push($cart, $item->toArray());
+        }
+        // 2 - da co trong gio hang => xac dinh index
+        // cart[index][quantity]++
+        else {
+            $cart[$flag]['quantity']++;
+        }
+        //cap nhat cart
+        session(['cart' => $cart]);
+
+        return response()->json(['succsess' => true, 'data' => $cart]);
+    }
+
+    public function deleteCart(Request $request)
+    {
+        //lay ra product cos id la id ben ajax gui vao
+        $product = $this->productRepository->find($request->id);
+        if(!$product) {
+            return "404 notfound!";
+        }
+        //tao bien cart chua cac produc con lai trong gio hang
+        $cart = [];
+        //kiem tra ton tai cua gio hang
+        if(session()->has('cart') == true) {
+            //kiem tra xem product co trong gio hang hay ko neu co thi delete
+            foreach (session('cart') as $key => $value) {
+                if($value['id'] === $product->id)
+                {
+                    unset($value[$key]);
+                }
+                else
+                {
+                    array_push($cart, $value);
+                }
+            }
+            session(['cart' => $cart]);
+        }
+
+        return response()->json(['succsess' => true, 'data' => $cart]);
     }
 }
