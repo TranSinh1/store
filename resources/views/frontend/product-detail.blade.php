@@ -17,7 +17,7 @@
                 <p class="vendor">Nhà sản xuất:&nbsp; <span>MICROSOFT</span></p>
                 <p itemprop="price" class="price-box product-price-box"> <span class="special-price"> <span class="price product-price">@php echo number_format($product->price)." ₫";@endphp </span> </span> </p>
                 <p class="desc rte"> {{$product->desc}}</p>
-                <form action="/cart/add" method="post" enctype="multipart/form-data" class="product-form">
+               <!--  <form action="/cart/add" method="post" enctype="multipart/form-data" class="product-form"> -->
                   <select id="product-selectors" name="variantId" style="display:none">
                     <option selected="selected" value="1853207">Đen - 15.990.000₫</option>
                     <option value="1853286">Trắng - 14.500.000₫</option>
@@ -27,9 +27,9 @@
                     <input type="number" id="qty" name="quantity" value="1" min="1" class="input-control" required="Không thể để trống">
                   </div>
                   <div class="action-btn">
-                    <button class="button product-add-to-cart">Cho vào giỏ hàng</button>
+                    <button class="button add_to_cart_btn" item_id={{$product->id}}  >Cho vào giỏ hàng</button>
                   </div>
-                </form>
+              <!--   </form> -->
               </div>
             </div>
           </div>
@@ -52,3 +52,34 @@
         <!-- end main --> 
     </div>
 @endsection
+@section('script')
+    <script>
+        $(document).ready(function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $('.add_to_cart_btn').on('click', function(){
+                var itemId = $(this).attr('item_id');
+                $.ajax({
+                    url:'{{route('cart.add')}}',
+                    method: 'POST',
+                    data: {
+                        id: itemId,
+                        _token: '{{csrf_token()}}'
+                    },
+                    dataType: 'JSON',
+                    success: function(rp){
+                        var total = parseInt($('#mini-cart').html());
+                            total++;
+                            $('#mini-cart').html(total)
+                        console.log(rp);
+                    }
+                })
+            })
+        });
+    </script>
+    
+@endsection
+
