@@ -29,6 +29,7 @@ Route::post('add-cart', 'HomeController@addCart')->name('cart.add');
 
 Route::post('delete-cart', 'HomeController@deleteCart')->name('del.cart');
 
+//test cart
 Route::get('/remove-cart', function(){
         session()->forget('cart');
 })->name('cart.clear');
@@ -37,9 +38,20 @@ Route::get('/check-cart', function(){
         dd(session('cart'));
 })->name('cart.checkout');
 
+//Route admin
 Route::group(['prefix'=>'admin'], function() {
+
 	Route::group(['prefix'=>'category'], function() {
-		Route::get('list', 'Admin\CategoryController@list');
+
+		Route::get('list', 'Admin\CategoryController@list')->name('list.cate');
+
+		Route::get('create', 'Admin\CategoryController@getCreate')->name('create.cate');
+		Route::post('create', 'Admin\CategoryController@postCreate');
+
+		Route::get('update/{id}', 'Admin\CategoryController@getUpdate')->name('update.cate');
+		Route::post('update/{id}', 'Admin\CategoryController@postUpdate');
+
+		Route::post('delete', 'Admin\CategoryController@delete')->name('del.cate');
 	});
 });
 
