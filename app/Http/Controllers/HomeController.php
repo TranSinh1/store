@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Repositories\Product\ProductRepositoryInterface;
 use App\Repositories\NewRepository\NewRepositoryInterface;
-use  Illuminate\Support\Collection;
 
 class HomeController extends Controller
 {
