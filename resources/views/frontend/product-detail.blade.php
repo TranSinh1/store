@@ -9,7 +9,7 @@
           <div class="top">
             <div class="row">
               <div class="col-xs-12 col-md-6 product-image">
-                <div class="featured-image"> <img src="{{$product->image}}" class="img-responsive" id="large-image" itemprop="image" data-zoom-image="{{$product->image}}" alt="MICROSOFT LUMIA 950 XL"> </div>
+                <div class="featured-image"> <img src="{{asset($product->image)}}" class="img-responsive" id="large-image" itemprop="image" data-zoom-image="{{$product->image}}" alt="{{$product->name}}"> </div>
               </div>
               <div class="col-xs-12 col-md-6 info">
                 <h1 itemprop="name">{{$product->name}}</h1>

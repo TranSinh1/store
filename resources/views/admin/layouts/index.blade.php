@@ -57,7 +57,8 @@
     <!-- DataTables JavaScript -->
     <script src="{{asset('assets_admin/bower_components/DataTables/media/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('assets_admin/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js')}}"></script>
-
+    <!-- ckeditor -->
+    <script src="{{asset('assets_admin/ckeditor/ckeditor.js')}}"></script>
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     @yield('script')
 </body>

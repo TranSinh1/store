@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">Category
-                            <small>Add</small>
+                            <small>{{$cate->name}}</small>
                         </h1>
                     </div>
                     <!-- /.col-lg-12 -->
@@ -20,7 +20,7 @@
                         <div class="alert alert-success">{{session('alert')}}</div>
                     @endif
                     <div class="col-lg-7" style="padding-bottom:120px">
-                        <form action="" method="POST">
+                        <form action="{{route('update.cate', ['id' => $cate->id])}}" method="POST">
                         @csrf
                             <div class="form-group">
                                 <label>Name</label>

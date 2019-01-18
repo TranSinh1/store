@@ -15,7 +15,7 @@
                   <!-- box product -->
                   <div class="col-xs-6 col-md-6 col-sm-6 ">
                     <div class="product-grid" id="product-1168979">
-                      <div class="image"> <a href="{{route('new.detail', ['id' => $n->id])}}"><div style="height: 400px; overflow: hidden;"><img src="{{$n->image}}" title="{{$n->name}}" alt="{{$n->name}}" class="img-responsive"></div></a> </div>
+                      <div class="image"> <a href="{{route('new.detail', ['id' => $n->id])}}"><div style="height: 400px; overflow: hidden;"><img src="{{asset($n->image)}}" title="{{$n->name}}" alt="{{$n->name}}" class="img-responsive"></div></a> </div>
                         <h3 class="name"><a href="{{route('new.detail', ['id' => $n->id])}}">{{$n->name}}</a></h3>
                         <p class="date">{{$n->created_at}}</p>
                         <p class="desc" style="text-indent: 10px;">{{$n->desc}}</p>

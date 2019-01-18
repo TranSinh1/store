@@ -31,10 +31,10 @@
                     <a href="#"><i class="fa fa-cube fa-fw"></i> Product<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li>
-                            <a href="#">List Product</a>
+                            <a href="{{route('list.product')}}">List Product</a>
                         </li>
                         <li>
-                            <a href="#">Add Product</a>
+                            <a href="{{route('create.product')}}">Create Product</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
