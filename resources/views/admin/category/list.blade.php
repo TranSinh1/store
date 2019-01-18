@@ -50,7 +50,6 @@
 <script>
     function deleteAjax(cate_id) {
         $(document).ready(function(){
-            if()
             $.ajax({
                 url: '{{asset(route('del.cate'))}}',
                 method: 'POST',

@@ -15,7 +15,7 @@
           <!-- box product -->
           <div class="col-xs-6 col-md-3 col-sm-6 ">
             <div class="product-grid" id="product-1168979">
-              <div class="image"> <a href="{{route('product', ['id' => $new_pro->id])}}"><div style="height: 240px; overflow: hidden;"><img src="{{$new_pro->image}}" title="{{$new_pro->name}}" alt="{{$new_pro->name}}" class="img-responsive"></div></a> </div>
+              <div class="image"> <a href="{{route('product', ['id' => $new_pro->id])}}"><div style="height: 240px; overflow: hidden;"><img src="{{asset($new_pro->image)}}" title="{{$new_pro->name}}" alt="{{$new_pro->name}}" class="img-responsive"></div></a> </div>
               <div class="info">
                 <h3 class="name"><a href="{{route('product', ['id' => $new_pro->id])}}">{{$new_pro->name}}</a></h3>
                 <p class="price-box"> <span class="special-price"> <span class="price product-price"><?php echo number_format($new_pro->price)." ₫"; ?></span> </span> </p>
@@ -48,7 +48,7 @@
           <!-- box product -->
         <div class="col-xs-6 col-sm-4 col-md-3 ">
           <div class="product-grid product-loop" id="product-1142079">
-            <div class="image"> <a href="{{route('product', ['id' => $hot_pro->id])}}"><div style="height: 240px; overflow: hidden;"><img src="{{$hot_pro->image}}" title="{{$hot_pro->name}}" alt="{{$hot_pro->name}}" class="img-responsive"></div></a> </div>
+            <div class="image"> <a href="{{route('product', ['id' => $hot_pro->id])}}"><div style="height: 240px; overflow: hidden;"><img src="{{asset($hot_pro->image)}}" title="{{$hot_pro->name}}" alt="{{$hot_pro->name}}" class="img-responsive"></div></a> </div>
             <div class="info">
               <h3 class="name"><a href="product/detail/{{$hot_pro->id}}">{{$hot_pro->name}}</a></h3>
               <p class="price-box"> <span class="special-price"> <span class="price product-price"><?php echo number_format($hot_pro->price)." ₫" ?> </span> </span> </p>

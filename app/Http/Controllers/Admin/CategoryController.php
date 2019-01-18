@@ -22,7 +22,7 @@ class CategoryController extends Controller
     	$categories = $this->categoryRepository->model()->paginate(10);
     	$keyword = $request->keyword;
     	if($keyword) {
-    		$categories = $this->categoryRepository->model()->where('name', 'like', "%$keyword%")->paginate(1);
+    		$categories = $this->categoryRepository->model()->where('name', 'like', "%$keyword%")->paginate(10);
     		$categories->setPath(route('list.cate'));
             $categories->withPath('?keyword=' . $keyword);
     	}

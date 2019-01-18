@@ -39,7 +39,7 @@
                         $totalPrice += ($item['quantity']*$item['price'])
                   @endphp
                   <li class="clearfix" id="item-1853038">
-                    <div class="image"> <a href="#"> <img alt="Sản phẩm 2" src="{{$item['image']}}" title="Sản phẩm 2" class="img-responsive"> </a> </div>
+                    <div class="image"> <a href="#"> <img alt="Sản phẩm 2" src="{{asset($item['image'])}}" title="Sản phẩm 2" class="img-responsive"> </a> </div>
                     <div class="info" id="item-cart">
                       <h3><a href="#">{{$item['name']}}</a></h3>
                       <p>{{$item['quantity']}} x @php echo number_format($item['price'])." ₫"; @endphp</p>

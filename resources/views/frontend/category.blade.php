@@ -15,7 +15,7 @@
                   <!-- box product -->
                   <div class="col-xs-6 col-md-3 col-sm-6 ">
                     <div class="product-grid" id="product-1168979">
-                      <div class="image"> <a href="{{route('product', ['id' => $p->id])}}"><div style="height: 240px; overflow: hidden;"><img src="{{$p->image}}" title="{{$p->name}}" alt="{{$p->name}}" class="img-responsive"></div></a> </div>
+                      <div class="image"> <a href="{{route('product', ['id' => $p->id])}}"><div style="height: 240px; overflow: hidden;"><img src="{{asset($p->image)}}" title="{{$p->name}}" alt="{{$p->name}}" class="img-responsive"></div></a> </div>
                       <div class="info">
                         <h3 class="name"><a href="{{route('product', ['id' => $p->id])}}">{{$p->name}}</a></h3>
                         <p class="price-box"> <span class="special-price"> <span class="price product-price"><?php echo number_format($p->price)." đ"; ?></span> </span> </p>
