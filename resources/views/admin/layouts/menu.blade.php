@@ -40,13 +40,13 @@
                     <!-- /.nav-second-level -->
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-users fa-fw"></i> User<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-users fa-fw"></i> New<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li>
-                            <a href="#">List User</a>
+                            <a href="{{asset(route('list.new'))}}">List New</a>
                         </li>
                         <li>
-                            <a href="#">Add User</a>
+                            <a href="{{asset(route('create.new'))}}">Create User</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
