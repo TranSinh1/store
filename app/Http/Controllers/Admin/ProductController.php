@@ -10,7 +10,7 @@ use App\Category;
 
 class ProductController extends Controller
 {
-    protected $productRepository;
+  protected $productRepository;
 
 	public function __construct(ProductRepositoryInterface $productRepository)
 	{
@@ -18,10 +18,10 @@ class ProductController extends Controller
 	}
     public function list(Request $request)
     {
-    	$products = $this->productRepository->model()->paginate(10);
+    	$products = $this->productRepository->model()->paginate(config('customer.paginate.product'));
     	$keyword = $request->keyword;
     	if($keyword) {
-    		$products = $this->productRepository->model()->where('name', 'like', "%$keyword%")->paginate(10);
+    		$products = $this->productRepository->model()->where('name', 'like', "%$keyword%")->paginate(config('customer.paginate.product'));
     		$products->setPath(route('list.product'));
             $products->withPath('?keyword=' . $keyword);
     	}
@@ -85,11 +85,13 @@ class ProductController extends Controller
     			[
     				'image.image' => 'Not file image'
     			]);
-  			//kiem tra file anh va xoa anh trong folder
-  			if(file_exists('images/products/'.$image_old))
-  			{
-  				unlink('images/products/'.$image_old);
-  			}
+        if(!empty($image_old)) {
+    			//kiem tra file anh va xoa anh trong folder
+    			if(file_exists(public_path('images/products/'.$image_old)))
+    			{
+    				unlink(public_path('images/products/'.$image_old));
+    			}
+        }
 
   			$file = $request->image;
 
@@ -111,12 +113,13 @@ class ProductController extends Controller
     	$image_old = $this->productRepository->find($request->id)->image;
   		//bo chuoi images/products/ khoi ten image de co the unlink
   		$image_old = str_replace("images/products/", '', $image_old);
-  		//kiem tra ton tai cua file anh cu va xoa di
-  		if(file_exists('images/products/'.$image_old))
-  			{
-  				unlink('images/products/'.$image_old);
-  			}
-  			
+      if(!empty($image_old)) {
+    		//kiem tra ton tai cua file anh cu va xoa di
+    		if(file_exists(public_path('images/products/'.$image_old)))
+    			{
+    				unlink(public_path('images/products/'.$image_old));
+    			}
+  		}
     	$this->productRepository->delete($request->id);
     }
 }

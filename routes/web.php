@@ -66,6 +66,17 @@ Route::group(['prefix'=>'admin'], function() {
 
 		Route::post('delete', 'Admin\ProductController@delete')->name('del.product');
 	});
+
+	Route::group(['prefix'=>'new'], function() {
+
+		Route::get('list', 'Admin\NewController@list')->name('list.new');
+
+		Route::get('create', 'Admin\NewController@getCreate')->name('create.new');
+		Route::post('create', 'Admin\NewController@postCreate');
+
+		Route::get('update/{id}', 'Admin\NewController@getUpdate')->name('update.new');
+		Route::post('update/{id}', 'Admin\NewController@postUpdate');
+
+		Route::get('delete/{id}', 'Admin\NewController@delete')->name('del.new');
+	});
 });
-
-
