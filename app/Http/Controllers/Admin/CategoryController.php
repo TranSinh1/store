@@ -19,10 +19,10 @@ class CategoryController extends Controller
 	}
     public function list(Request $request)
     {
-    	$categories = $this->categoryRepository->model()->paginate(10);
+    	$categories = $this->categoryRepository->model()->paginate(config('customer.paginate.category'));
     	$keyword = $request->keyword;
     	if($keyword) {
-    		$categories = $this->categoryRepository->model()->where('name', 'like', "%$keyword%")->paginate(10);
+    		$categories = $this->categoryRepository->model()->where('name', 'like', "%$keyword%")->paginate(config('customer.paginate.category'));
     		$categories->setPath(route('list.cate'));
             $categories->withPath('?keyword=' . $keyword);
     	}

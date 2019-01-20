@@ -62,7 +62,7 @@
     <div class="container">
       <div class="clearfix">
         <ul class="main-nav hidden-xs hidden-sm list-unstyled">
-          <li class="active"><a href="{{route('home')}}">Trang chủ</a></li>
+          <li class="active"><a href="{{asset(route('home.page'))}}">Trang chủ</a></li>
           <li ><a href="gioi-thieu">Giới thiệu</a></li>
           <li ><a href="gioi-thieu">Sản phẩm</a></li>
           <li ><a href="{{route('new')}}">Tin tức</a></li>
@@ -70,7 +70,7 @@
         </ul>
         <a href="javascript:void(0);" class="toggle-main-menu hidden-md hidden-lg"> <i class="fa fa-bars"></i> </a>
         <ul class="list-unstyled mobile-main-menu hidden-md hidden-lg" style="display:none">
-          <li><a href="{{route('home')}}">Trang chủ</a></li>
+          <li><a href="{{asset(route('home.page'))}}">Trang chủ</a></li>
           <li><a href="gioi-thieu">Giới thiệu</a></li>
           <li><a href="collections/all">Sản phẩm</a>
             <ul style="display:none">

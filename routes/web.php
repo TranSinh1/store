@@ -11,23 +11,29 @@
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.layout.index');
-});
+// Route::get('/', function () {
+//     return view('frontend.layout.index');
+// });
 
-Route::get('home', 'HomeController@homePage')->name('home');
+Route::get('home-page', 'HomepageController@homePage')->name('home.page');
 
-Route::get('category/{id}', 'HomeController@category')->name('category');
+Route::get('category/{id}', 'HomepageController@category')->name('category');
 
-Route::get('product-detail/{id}', 'HomeController@productDetail')->name('product');
+Route::get('product-detail/{id}', 'HomepageController@productDetail')->name('product');
 
-Route::get('new', 'HomeController@new')->name('new');
+Route::get('new', 'HomepageController@new')->name('new');
 
-Route::get('new-detail/{id}', 'HomeController@newDetail')->name('new.detail');
+Route::get('new-detail/{id}', 'HomepageController@newDetail')->name('new.detail');
 
-Route::post('add-cart', 'HomeController@addCart')->name('cart.add');
+Route::post('add-cart', 'HomepageController@addCart')->name('cart.add');
 
-Route::post('delete-cart', 'HomeController@deleteCart')->name('del.cart');
+Route::post('delete-cart', 'HomepageController@deleteCart')->name('del.cart');
+
+Route::get('login-admin', 'LoginLogoutController@getLogin')->name('login.admin');
+
+Route::post('login-admin', 'LoginLogoutController@postLogin');
+
+Route::get('logout', 'LoginLogoutController@logout')->name('logout.admin');
 
 //test cart
 Route::get('/remove-cart', function(){
@@ -39,7 +45,7 @@ Route::get('/check-cart', function(){
 })->name('cart.checkout');
 
 //Route admin
-Route::group(['prefix'=>'admin'], function() {
+Route::group(['prefix' => 'admin', 'middleware' => 'check.admin'], function() {
 
 	Route::group(['prefix'=>'category'], function() {
 
@@ -80,3 +86,4 @@ Route::group(['prefix'=>'admin'], function() {
 		Route::get('delete/{id}', 'Admin\NewController@delete')->name('del.new');
 	});
 });
+
