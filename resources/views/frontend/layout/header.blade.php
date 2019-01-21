@@ -38,13 +38,13 @@
                   @php
                         $totalPrice += ($item['quantity']*$item['price'])
                   @endphp
-                  <li class="clearfix" id="item-1853038">
-                    <div class="image"> <a href="#"> <img alt="Sản phẩm 2" src="{{asset($item['image'])}}" title="Sản phẩm 2" class="img-responsive"> </a> </div>
+                  <li class="clearfix" id="item_{{$item['id']}}">
+                    <div class="image"> <a href="{{route('product', ['id' => $item['id']])}}"> <img alt="Sản phẩm 2" src="{{asset($item['image'])}}" title="Sản phẩm 2" class="img-responsive"> </a> </div>
                     <div class="info" id="item-cart">
-                      <h3><a href="#">{{$item['name']}}</a></h3>
+                      <h3><a href="{{route('product', ['id' => $item['id']])}}">{{$item['name']}}</a></h3>
                       <p>{{$item['quantity']}} x @php echo number_format($item['price'])." ₫"; @endphp</p>
                     </div>
-                    <div> <a href="javascript:;"> <i  class="del-product fa fa-times" item_id={{$item['id']}}></i></a> </div>
+                    <div> <a href="javascript:;"> <i  class="fa fa-times" id="del-product-{{$item['id']}}" onclick="del_product({{ $item['id'] }})" item_id={{$item['id']}}"></i></a> </div>
                   </li>
                 @endforeach
                 </ul>
