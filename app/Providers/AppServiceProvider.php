@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        view::composer('frontend.layout.index', function ($view) {
+        view::composer(['frontend.layout.index', 'frontend.product-detail'], function ($view) {
             $categories = Category::all();
             $news = NewModel::where('hot_new', 1)->orderBy('id', 'desc')->take(6)->get();
             $listNew = NewModel::where('hot_new', 1)->orderBy('id', 'desc')->paginate(4);

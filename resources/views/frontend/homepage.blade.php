@@ -72,72 +72,9 @@
 </div>
 @endsection
 @section('pagejs')
-    <script>
-        $(document).ready(function(){
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $('.add_to_cart_btn').on('click', function(){
-                var itemId = $(this).attr('item_id');
-                $.ajax({
-                    url:'{{route('cart.add')}}',
-                    method: 'POST',
-                    data: {
-                        id: itemId,
-                        _token: '{{csrf_token()}}'
-                    },
-                    dataType: 'JSON',
-                    success: function(rp){
-                            var total = parseInt($('#mini-cart').html());
-                            total++;
-                            var totalPrice = 0;
-                            var assetBaseUrl = '{{asset('/')}}';
-                            var cartDetail = ``;
-                            var totalItem = 0;
-                            for(var i = 0; i < rp.data.length; i++){
-                                var cItem = rp.data[i];
-                                totalItem += rp.data[i].quantity;
-                                totalPrice += (rp.data[i].quantity*rp.data[i].price);
-                                cartDetail += `<li class="clearfix" id="item-1853038">
-                                                <div class="image"> <a href="#"> <img alt="Sản phẩm 2" src="${cItem.image}" title="Sản phẩm 2" class="img-responsive"> </a> </div>
-                                                <div class="info">
-                                                  <h3><a href="#">${cItem.name}</a></h3>
-                                                  <p>${cItem.quantity} x ${cItem.price} ₫</p>
-                                                </div>
-                                                <div> <a href="javascript:;"><i item_id=${cItem.id} class="del-product fa fa-times"></i></a> </div>
-                                                </li>`;
-                            }
-                            $('#mini-cart').html(total)
-                            $('.total-price').text('$' + totalPrice);
-                            $('.list-cart-mini').empty();
-                            $('.list-cart-mini').append(cartDetail);
-                            console.log(rp);
-                    }
-                })
-            })
-
-            
-            $('.del-product').on('click', function(){
-                var itemId = $(this).attr('item_id');
-                $.ajax({
-                    url:'{{route('del.cart')}}',
-                    method: 'POST',
-                    data: {
-                        id: itemId,
-                        _token: '{{csrf_token()}}'
-                    },
-                    dataType: 'JSON',
-                    success: function(rp){
-
-                               
-                            console.log(rp);
-                    }
-                })
-            })
-            
-        });
-    </script>
-    
+<script type="text/javascript">
+ $(document).ready(function() {
+   
+ });
+</script>
 @endsection

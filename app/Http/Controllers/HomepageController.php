@@ -28,12 +28,12 @@ class HomepageController extends Controller
     public function category($id)
     {
         $category = $this->categoryRepository->find($id);
-        if(!$category)
+        if (!$category)
         {
             return "404 notfound";
         }
         $products = $category->product()->orderBy('id', 'desc')->paginate(8);
-         if(!$products)
+         if (!$products)
         {
             return "404 notfound";
         }
@@ -43,10 +43,11 @@ class HomepageController extends Controller
     public function productDetail($id)
     {
         $product = $this->productRepository->find($id);
-        if(!$product)
+        if (!$product)
         {
             return "404 notfound";
         }
+
         return view('frontend.product-detail', compact('product'));
     }
     public function new()
@@ -57,7 +58,7 @@ class HomepageController extends Controller
     public function newDetail($id)
     {
         $new = $this->newRepository->find($id);
-        if(!$new)
+        if (!$new)
         {
             return "404 notfound";
         }
@@ -66,7 +67,7 @@ class HomepageController extends Controller
     public function addCart(Request $request)
     {
         $item = $this->productRepository->find($request->id);
-        if(!$item) {
+        if (!$item) {
             return "404 notfound!";
         }
         //check xem co gio hang hay chua
@@ -75,21 +76,28 @@ class HomepageController extends Controller
         $flag = -1;
         // kiem tra san pham xem co trong gio hang hay chua
         foreach ($cart as $key => $val) {
-            if($val['id'] === $item->id)
+            if ($val['id'] === $item->id)
             {
                 $flag = $key;
                 break;
             }
         }
         // 1 - chua co => chuyen $item => mang | add quantity = 1
-        if($flag === -1) {
+        if ($flag === -1) {
             $item->quantity = 1;
+            if ($request->qty_product) {
+                $item->quantity = $request->qty_product;
+            }
             array_push($cart, $item->toArray());
         }
         // 2 - da co trong gio hang => xac dinh index
         // cart[index][quantity]++
         else {
-            $cart[$flag]['quantity']++;
+            if ($request->qty_product) {
+                $cart[$flag]['quantity'] = $request->qty_product; 
+            } else {
+                $cart[$flag]['quantity']++;
+            }
         }
         //cap nhat cart
         session(['cart' => $cart]);
@@ -104,12 +112,18 @@ class HomepageController extends Controller
         }
         //tao bien cart chua cac produc con lai trong gio hang
         $cart = [];
+        $totalPrice = 0;
+        $totalItem = 0;
         //kiem tra ton tai cua gio hang
         if(session()->has('cart') == true) {
             //kiem tra xem product co trong gio hang hay ko neu co thi delete
             foreach (session('cart') as $key => $value) {
+                $totalPrice += $value['price']*$value['quantity'];
+                $totalItem += $value['quantity'];
                 if($value['id'] === $product->id)
                 {
+                    $totalPrice -=$value['price']*$value['quantity'];
+                    $totalItem = $totalItem - $value['quantity'];
                     unset($value[$key]);
                 }
                 else
@@ -119,6 +133,7 @@ class HomepageController extends Controller
             }
             session(['cart' => $cart]);
         }
-        return response()->json(['succsess' => true, 'data' => $cart]);
+
+        return response()->json(['totalItem' => $totalItem, 'totalPrice' => $totalPrice, 'data' => $cart]);
     }
 }

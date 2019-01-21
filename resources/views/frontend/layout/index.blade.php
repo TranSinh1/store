@@ -137,5 +137,77 @@
 </div>
 </body>
 </html>
+ <script>
+$(document).ready(function(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $('.add_to_cart_btn').on('click', function(){
+        var itemId = $(this).attr('item_id');
+        $.ajax({
+            url:'{{route('cart.add')}}',
+            method: 'POST',
+            data: {
+                id: itemId,
+                _token: '{{csrf_token()}}'
+            },
+            dataType: 'JSON',
+            success: function(rp){
+                    // var total = parseInt($('#mini-cart').html());
+                    // total++;
+                    var totalItem = 0;
+                    var totalPrice = 0;
+                    var Url = "product-detail/";
+                    var cartDetail = ``;
+                    var totalItem = 0;
+                    for(var i = 0; i < rp.data.length; i++){
+                        var cItem = rp.data[i];
+                        totalItem += parseInt(rp.data[i].quantity);
+                        totalPrice += (rp.data[i].quantity*rp.data[i].price);
+                        cartDetail += `<li class="clearfix" id="item_${cItem.id}">
+                                        <div class="image"> <a href="${Url}${cItem.id}"> <img alt="Sản phẩm 2" src="${cItem.image}" title="Sản phẩm 2" class="img-responsive"> </a> </div>
+                                        <div class="info" id="item-cart">
+                                          <h3><a href="${Url}${cItem.id}">${cItem.name}</a></h3>
+                                          <p>${cItem.quantity} x ${cItem.price}</p>
+                                        </div>
+                                        <div> <a href="javascript:;"> <i  class="fa fa-times" id="del-product-${cItem.id}" onclick="del_product(${cItem.id})" item_id=${cItem.id}"></i></a> </div>
+                                      </li>`;
+                    }
+                    $('#mini-cart').html(totalItem)
+                    $('.total-price').text('$' + totalPrice);
+                    $('.list-cart-mini').empty();
+                    $('.list-cart-mini').append(cartDetail);
+                    console.log(rp);
+            }
+        })
+    })
+})
+</script>
+<script type="text/javascript"> 
+  function del_product(id) {
+    $(document).ready(function() {
+      $.ajax({
+        url: "{{route('del.cart')}}",
+        method:'POST',
+        data:{
+          id: id,
+          _token: '{{csrf_token()}}'
+        },
+        success:function(rp){
+          
+
+          console.log(rp.totalItem)
+          console.log(rp.totalPrice)
+          $('.total-price').text(rp.totalPrice)
+          $('.mini-cart-count').text(rp.totalItem)
+          $('#item_'+id).css({'display':'none'})
+          console.log(rp)
+        }
+      })
+    })
+  }
+</script>
 @yield('script')
 @yield('pagejs')
