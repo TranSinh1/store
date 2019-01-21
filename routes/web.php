@@ -85,5 +85,18 @@ Route::group(['prefix' => 'admin', 'middleware' => 'check.admin'], function() {
 
 		Route::get('delete/{id}', 'Admin\NewController@delete')->name('del.new');
 	});
+
+	Route::group(['prefix'=>'user'], function() {
+
+		Route::get('list', 'Admin\UserController@list')->name('list.user');
+
+		Route::get('create', 'Admin\UserController@getCreate')->name('create.user');
+		Route::post('create', 'Admin\UserController@postCreate');
+
+		Route::get('update/{id}', 'Admin\UserController@getUpdate')->name('update.user');
+		Route::post('update/{id}', 'Admin\UserController@postUpdate');
+
+		Route::get('delete/{id}', 'Admin\UserController@delete')->name('del.user');
+	});
 });
 

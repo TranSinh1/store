@@ -24,7 +24,7 @@
                 @csrf
                     <div class="form-group">
                         <label>Name</label>
-                        <input class="form-control" value="{{$product->name}}" name="name" placeholder="Please Enter name product">
+                        <input type="text" class="form-control" value="{{$product->name}}" name="name" placeholder="Please Enter name product">
                     </div>
                     <div class="form-group">
                         <label>Category</label>
@@ -36,7 +36,7 @@
                     </div>
                     <div class="form-group">
                         <label>Price</label>
-                        <input class="form-control" value="{{$product->price}}" name="price" placeholder="Please Enter price">
+                        <input type="number" class="form-control" value="{{$product->price}}" name="price" placeholder="Please Enter price">
                     </div>
                     <div class="form-group">
                         <label>Description</label>

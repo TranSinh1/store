@@ -10,12 +10,13 @@ use App\Category;
 
 class ProductController extends Controller
 {
-  protected $productRepository;
+    protected $productRepository;
 
 	public function __construct(ProductRepositoryInterface $productRepository)
 	{
 		$this->productRepository = $productRepository;
 	}
+    
     public function list(Request $request)
     {
     	$products = $this->productRepository->model()->paginate(config('customer.paginate.product'));

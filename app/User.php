@@ -16,12 +16,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $guarded = [
-        'id',
+        'id', 'passwordAgain', 'changePassword'
     ];
 
     public function role()
     {
-        return $this->belongsTo('App\Role', 'role_id');
+        return $this->belongsTo('App\Role', 'role_id', 'id');
     }
 
     public function invoice()
