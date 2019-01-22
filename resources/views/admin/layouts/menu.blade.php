@@ -28,6 +28,15 @@
                     <!-- /.nav-second-level -->
                 </li>
                 <li>
+                    <a href="{{route('list.cate')}}"><i class="fa fa-bar-chart-o fa-fw"></i> Invoice<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li>
+                            <a href="{{route('list.invoice')}}">List Ivoice</a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+                <li>
                     <a href="#"><i class="fa fa-cube fa-fw"></i> Product<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li>

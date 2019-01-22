@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Invoice extends Model
 {
+	protected $table = 'invoice';
     protected $guarded = ['id'];
 
     public function product()
@@ -16,5 +17,15 @@ class Invoice extends Model
     public function user()
     {
     	return $this->belongsTo('App\User', 'user_id');
+    }
+
+    public function paymethod()
+    {
+        return $this->belongsTo('App\Paymethod', 'paymethod_id');
+    }
+
+    public function status()
+    {
+        return $this->belongsTo('App\StatusInvoice', 'status_id');
     }
 }

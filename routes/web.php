@@ -98,5 +98,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'check.admin'], function() {
 
 		Route::get('delete/{id}', 'Admin\UserController@delete')->name('del.user');
 	});
-});
 
+	Route::group(['prefix'=>'invoice'], function() {
+
+		Route::get('list', 'Admin\InvoiceController@list')->name('list.invoice');
+
+		Route::get('update/{id}', 'Admin\InvoiceController@getUpdate')->name('update.invoice');
+		Route::post('update/{id}', 'Admin\InvoiceController@postUpdate');
+
+		Route::get('delete/{id}', 'Admin\InvoiceController@delete')->name('del.invoice');
+	});
+});
