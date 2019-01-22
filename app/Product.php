@@ -15,6 +15,6 @@ class Product extends Model
 
     public function invoice()
     {
-    	return $this->belongsToMany('App\Invoice', 'invoice_detail', 'invoice_id', 'product_id');
+    	return $this->belongsToMany('App\Invoice', 'invoice_details');
     }
 }

@@ -1,0 +1,10 @@
+function changePass() {
+    $(document).ready(function() {
+        if((this).is(":checked")){
+            document.getIlementById("password").removeAttr('disabled');
+        }
+        else{
+            $(".password").attr('disabled','');
+        }
+    });
+};

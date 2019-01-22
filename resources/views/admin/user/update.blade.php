@@ -4,8 +4,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">New
-                    <small>Create</small>
+                <h1 class="page-header">User
+                    <small>{{$user->name}}</small>
                 </h1>
             </div>
             <!-- /.col-lg-12 -->
@@ -31,13 +31,13 @@
                         <input class="form-control" value="{{$user->email}}" name="email" placeholder="Please Enter email" readonly>
                     </div>
                     <div class="form-group">
-                        <input type="checkbox" id="changePassword" name="changePassword">
+                        <input type="checkbox"  id="changePassword" name="changePassword">
                         <label>Đổi mật khẩu</label>
-                        <input class="form-control password" type="password"  name="password" placeholder="Nhập password" disabled="" />
+                        <input class="form-control password" id="password" type="password"  name="password" placeholder="Nhập password" disabled="" />
                     </div>
                     <div class="form-group">
                         <label>nhập lại password</label>
-                        <input class="form-control password" type="password" disabled="" name="passwordAgain" placeholder="Nhập lại password" />
+                        <input class="form-control password" id="passwordAgain" type="password" disabled="" name="passwordAgain" placeholder="Nhập lại password" />
                     </div>
                     <div class="form-group">
                         <label>Address</label>
@@ -65,18 +65,4 @@
     </div>
     <!-- /.container-fluid -->
 </div>
-@endsection
-@section('script')
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#changePassword').change(function(event) {
-                if($(this).is(":checked")){
-                    $(".password").removeAttr('disabled');
-                }
-                else{
-                    $(".password").attr('disabled','');
-                }
-            });
-        });
-    </script>
 @endsection
