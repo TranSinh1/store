@@ -11,7 +11,11 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-6"> <span><i class="fa fa-phone"></i> (04) 6674 2332</span> <span><i class="fa fa-envelope-o"></i> <a href="mailto:support@mail.com">support@mail.com</a></span> </div>
-        <div class="col-xs-12 col-sm-6 col-md-6 customer"> <a href="account"><i class="fa fa-user"></i> Đăng nhập</a> <a href="account/register"><i class="fa fa-user-plus"></i> Đăng ký</a> </div>
+        @if(!Auth::check())
+          <div class="col-xs-12 col-sm-6 col-md-6 customer"> <a href="{{route('login.client')}}"><i class="fa fa-user"></i> Đăng nhập</a> <a href="{{route('register.client')}}"><i class="fa fa-user-plus"></i> Đăng ký</a> </div>
+        @else
+          <div class="col-xs-12 col-sm-6 col-md-6 customer"> <a href="{{route('login.client')}}"><i class="fa fa-user"></i>{{Auth::user()->name}}</a> <a href="{{route('logout.client')}}"><i class="fa fa-user-plus"></i> Đăng xuất</a> </div>
+        @endif
       </div>
     </div>
   </div>

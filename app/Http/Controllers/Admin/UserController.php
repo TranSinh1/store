@@ -11,7 +11,7 @@ use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
-     protected $userRepository;
+    protected $userRepository;
 
 	public function __construct(UserRepositoryInterface $userRepository)
 	{

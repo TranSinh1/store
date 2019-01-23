@@ -41,7 +41,7 @@
                             </div>
                         @endif
                         @if(session('alert'))
-                            <div class="alert alert-success">{{session('alert')}}</div>
+                            <div class="alert alert-danger">{{session('alert')}}</div>
                         @endif
                         <form role="form" action="" method="POST">
                         @csrf

@@ -36,10 +36,15 @@ Route::get('remove-cart', 'CartController@removeCart')->name('remove.cart');
 Route::post('update-cart', 'CartController@updateCart')->name('update.cart');
 
 Route::get('login-admin', 'LoginLogoutController@getLogin')->name('login.admin');
-
 Route::post('login-admin', 'LoginLogoutController@postLogin');
+Route::get('logout-admin', 'LoginLogoutController@logout')->name('logout.admin');
 
-Route::get('logout', 'LoginLogoutController@logout')->name('logout.admin');
+Route::get('login-client', 'LoginLogoutController@getLoginClient')->name('login.client');
+Route::post('login-client', 'LoginLogoutController@postLoginClient')->name('post.login.client');
+Route::get('logout-client', 'LoginLogoutController@logoutClient')->name('logout.client');
+Route::get('register-client', 'LoginLogoutController@getRegisterClient')->name('register.client');
+Route::post('register-client', 'LoginLogoutController@registerClient');
+
 
 //Route admin
 Route::group(['prefix' => 'admin', 'middleware' => 'check.admin'], function() {
