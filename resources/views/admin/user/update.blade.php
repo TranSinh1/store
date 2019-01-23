@@ -9,16 +9,16 @@
                 </h1>
             </div>
             <!-- /.col-lg-12 -->
-             @if(count($errors)>0)
-                         <div class="alert alert-danger">
-                            @foreach($errors->all() as $err)
-                               {{$err}}<br>
-                            @endforeach
-                        </div>
-                    @endif
-                    @if(session('alert'))
-                        <div class="alert alert-success">{{session('alert')}}</div>
-                    @endif
+            @if(count($errors)>0)
+                 <div class="alert alert-danger">
+                    @foreach($errors->all() as $err)
+                       {{$err}}<br>
+                    @endforeach
+                </div>
+            @endif
+            @if(session('alert'))
+                <div class="alert alert-success">{{session('alert')}}</div>
+            @endif
             <div class="col-lg-7" style="padding-bottom:120px">
                 <form action="" method="POST" enctype="multipart/form-data">
                 @csrf

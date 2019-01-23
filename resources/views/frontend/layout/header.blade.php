@@ -49,7 +49,7 @@
                 @endforeach
                 </ul>
                 <div class="total clearfix"> <span class="pull-left">Tổng tiền:</span> <span class="pull-right total-price">@php echo number_format($totalPrice)." ₫"; @endphp</span> </div>
-                <a href="checkout" class="button">Thanh toán</a>
+                <a href="{{route('view.cart')}}" class="button">Thanh toán</a>
             </div>
           </div>
         </div>

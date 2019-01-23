@@ -29,20 +29,17 @@ Route::post('add-cart', 'HomepageController@addCart')->name('cart.add');
 
 Route::post('delete-cart', 'HomepageController@deleteCart')->name('del.cart');
 
+Route::get('view-cart', 'CartController@Cart')->name('view.cart');
+
+Route::get('remove-cart', 'CartController@removeCart')->name('remove.cart');
+
+Route::post('update-cart', 'CartController@updateCart')->name('update.cart');
+
 Route::get('login-admin', 'LoginLogoutController@getLogin')->name('login.admin');
 
 Route::post('login-admin', 'LoginLogoutController@postLogin');
 
 Route::get('logout', 'LoginLogoutController@logout')->name('logout.admin');
-
-//test cart
-Route::get('/remove-cart', function(){
-        session()->forget('cart');
-})->name('cart.clear');
-
-Route::get('/check-cart', function(){
-        dd(session('cart'));
-})->name('cart.checkout');
 
 //Route admin
 Route::group(['prefix' => 'admin', 'middleware' => 'check.admin'], function() {
