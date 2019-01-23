@@ -20,7 +20,7 @@
                 <h3 class="name"><a href="{{route('product', ['id' => $new_pro->id])}}">{{$new_pro->name}}</a></h3>
                 <p class="price-box"> <span class="special-price"> <span class="price product-price"><?php echo number_format($new_pro->price)." ₫"; ?></span> </span> </p>
                 <div class="action-btn">
-                <form action="cart/add" method="post" enctype="multipart/form-data" id="product-actions-1168979">
+                <form action="" method="post" enctype="multipart/form-data" id="product-actions-1168979">
                 @csrf
                   <a href="javascript:;" class="add_to_cart_btn button " item_id={{$new_pro->id}} >Mua hàng</a>
                 </form>
@@ -70,11 +70,4 @@
   </div>
         <!-- end main --> 
 </div>
-@endsection
-@section('pagejs')
-<script type="text/javascript">
- $(document).ready(function() {
-   
- });
-</script>
 @endsection

@@ -108,7 +108,7 @@
                     console.log(quantity_product)
                     $('#mini-cart').text(totalItem)
                     //$('#qty').text(rp.qty)
-                    $('.total-price').text('$' + totalPrice);
+                    $('.total-price').text(totalPrice+"₫");
                     $('.list-cart-mini').empty();
                     $('.list-cart-mini').append(cartDetail);
           console.log(rp)

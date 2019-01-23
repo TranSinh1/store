@@ -155,31 +155,29 @@ $(document).ready(function(){
             },
             dataType: 'JSON',
             success: function(rp){
-                    // var total = parseInt($('#mini-cart').html());
-                    // total++;
-                    var totalItem = 0;
-                    var totalPrice = 0;
-                    var Url = "product-detail/";
-                    var cartDetail = ``;
-                    var totalItem = 0;
-                    for(var i = 0; i < rp.data.length; i++){
-                        var cItem = rp.data[i];
-                        totalItem += parseInt(rp.data[i].quantity);
-                        totalPrice += (rp.data[i].quantity*rp.data[i].price);
-                        cartDetail += `<li class="clearfix" id="item_${cItem.id}">
-                                        <div class="image"> <a href="${Url}${cItem.id}"> <img alt="Sản phẩm 2" src="${cItem.image}" title="Sản phẩm 2" class="img-responsive"> </a> </div>
-                                        <div class="info" id="item-cart">
-                                          <h3><a href="${Url}${cItem.id}">${cItem.name}</a></h3>
-                                          <p>${cItem.quantity} x ${cItem.price}</p>
-                                        </div>
-                                        <div> <a href="javascript:;"> <i  class="fa fa-times" id="del-product-${cItem.id}" onclick="del_product(${cItem.id})" item_id=${cItem.id}"></i></a> </div>
-                                      </li>`;
-                    }
-                    $('#mini-cart').html(totalItem)
-                    $('.total-price').text('$' + totalPrice);
-                    $('.list-cart-mini').empty();
-                    $('.list-cart-mini').append(cartDetail);
-                    console.log(rp);
+              var totalItem = 0;
+              var totalPrice = 0;
+              var Url = "product-detail/";
+              var cartDetail = ``;
+              var totalItem = 0;
+              for(var i = 0; i < rp.data.length; i++){
+                  var cItem = rp.data[i];
+                  totalItem += parseInt(rp.data[i].quantity);
+                  totalPrice += (rp.data[i].quantity*rp.data[i].price);
+                  cartDetail += `<li class="clearfix" id="item_${cItem.id}">
+                                  <div class="image"> <a href="${Url}${cItem.id}"> <img alt="Sản phẩm 2" src="${cItem.image}" title="Sản phẩm 2" class="img-responsive"> </a> </div>
+                                  <div class="info" id="item-cart">
+                                    <h3><a href="${Url}${cItem.id}">${cItem.name}</a></h3>
+                                    <p>${cItem.quantity} x ${cItem.price}</p>
+                                  </div>
+                                  <div> <a href="javascript:;"> <i  class="fa fa-times" id="del-product-${cItem.id}" onclick="del_product(${cItem.id})" item_id=${cItem.id}"></i></a> </div>
+                                </li>`;
+              }
+              $('#mini-cart').html(totalItem)
+              $('.total-price').text(totalPrice+"₫");
+              $('.list-cart-mini').empty();
+              $('.list-cart-mini').append(cartDetail);
+              console.log(rp);
             }
         })
     })
@@ -196,13 +194,11 @@ $(document).ready(function(){
           _token: '{{csrf_token()}}'
         },
         success:function(rp){
-          
-
-          console.log(rp.totalItem)
-          console.log(rp.totalPrice)
+          $('.total-price-cart').text(rp.totalPrice+"₫")
           $('.total-price').text(rp.totalPrice)
           $('.mini-cart-count').text(rp.totalItem)
           $('#item_'+id).css({'display':'none'})
+          $('#row_'+id).css({'display':'none'})
           console.log(rp)
         }
       })

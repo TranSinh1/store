@@ -20,8 +20,9 @@
                         <h3 class="name"><a href="{{route('product', ['id' => $p->id])}}">{{$p->name}}</a></h3>
                         <p class="price-box"> <span class="special-price"> <span class="price product-price"><?php echo number_format($p->price)." đ"; ?></span> </span> </p>
                         <div class="action-btn">
-                          <form action="cart/add" method="post" enctype="multipart/form-data" id="product-actions-1168979">
-                            <a href="index.php?controller=product_detail&amp;id=5" class="button">Chọn sản phẩm</a>
+                          <form action="" method="post" enctype="multipart/form-data" id="product-actions-1168979">
+                          @csrf
+                            <a href="javascript:;" item_id={{$p->id}} class="button add_to_cart_btn">Chọn sản phẩm</a>
                           </form>
                         </div>
                       </div>
