@@ -39,6 +39,10 @@
                         <input type="number" class="form-control" name="price" placeholder="Please Enter price">
                     </div>
                     <div class="form-group">
+                        <label>Quantity</label>
+                        <input type="number" class="form-control" name="quantity" placeholder="Please Enter quantity">
+                    </div>
+                    <div class="form-group">
                         <label>Description</label>
                         <textarea class="form-control" rows="3" placeholder="Please Enter Description" name="desc"></textarea>
                     </div>

@@ -13,7 +13,7 @@
                     <!-- /input-group -->
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                    <a href="{{route('home.admin')}}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
                 <li>
                     <a href="{{route('list.cate')}}"><i class="fa fa-bar-chart-o fa-fw"></i> Category<span class="fa arrow"></span></a>
@@ -68,6 +68,30 @@
                         </li>
                         <li>
                             <a href="{{asset(route('create.user'))}}">Create User</a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+                 <li>
+                    <a href="#"><i class="fa fa-users fa-fw"></i> Slide<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li>
+                            <a href="{{asset(route('list.slide'))}}">List Slide</a>
+                        </li>
+                        <li>
+                            <a href="{{asset(route('create.slide'))}}">Create Slide</a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+                 <li>
+                    <a href="#"><i class="fa fa-users fa-fw"></i> Status<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li>
+                            <a href="{{asset(route('list.status'))}}">List Status</a>
+                        </li>
+                        <li>
+                            <a href="{{asset(route('create.status'))}}">Create Status</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->

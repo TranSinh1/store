@@ -38,6 +38,10 @@
                         <label>Price</label>
                         <input type="number" class="form-control" value="{{$product->price}}" name="price" placeholder="Please Enter price">
                     </div>
+                     <div class="form-group">
+                        <label>Quantity</label>
+                        <input type="number" class="form-control" value="{{$product->quantity}}" name="quantity" placeholder="Please Enter price">
+                    </div>
                     <div class="form-group">
                         <label>Description</label>
                         <textarea class="form-control" rows="3" placeholder="Please Enter Description" name="desc">{{$product->desc}}</textarea>
@@ -68,7 +72,7 @@
                              value="0" type="radio">Not hot
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-default">Product Add</button>
+                    <button type="submit" class="btn btn-default">Update Product</button>
                     <button type="reset" class="btn btn-default">Reset</button>
                 
             </form></div>

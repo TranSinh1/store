@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use App\Category;
 use App\NewModel;
+use App\Slide;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,10 +20,13 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         view::composer(['frontend.layout.index', 'frontend.product-detail'], function ($view) {
-            $categories = Category::all();
+            $categories = Category::where('hot_cate', 1)->get();
             $news = NewModel::where('hot_new', 1)->orderBy('id', 'desc')->take(6)->get();
             $listNew = NewModel::where('hot_new', 1)->orderBy('id', 'desc')->paginate(4);
             $cart = session()->has('cart') == true ? session('cart') : [];
+            $slide = Slide::where('display', 1)->get();
+
+            $view->with('slide', $slide);
             $view->with('cart', $cart);
             $view->with('categories', $categories);
             $view->with('news', $news);
@@ -70,6 +74,21 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             \App\Repositories\Role\RoleRepositoryInterface::class,
             \App\Repositories\Role\RoleEloquentRepository::class
+        );
+
+        $this->app->bind(
+            \App\Repositories\InvoiceDetail\InvoiceDetailRepositoryInterface::class,
+            \App\Repositories\InvoiceDetail\InvoiceDetailEloquentRepository::class
+        );
+
+        $this->app->bind(
+            \App\Repositories\Slide\SlideRepositoryInterface::class,
+            \App\Repositories\Slide\SlideEloquentRepository::class
+        );
+
+        $this->app->bind(
+            \App\Repositories\Status\StatusRepositoryInterface::class,
+            \App\Repositories\Status\StatusEloquentRepository::class
         );
     }
 }

@@ -25,6 +25,7 @@ class CheckAdmin
         {
             return redirect(route('login.admin'))->with('alert', 'Bạn không đủ quyền truy cập');
         }
+       
 
         return $next($request);
     }

@@ -8,7 +8,7 @@
     <meta name="description" content="Khóa Học Lập Trình Laravel Framework 5.x Tại Khoa Phạm">
     <meta name="author" content="">
     <title>Admin</title>
-    
+    <script src="{{asset('assets_admin/bower_components/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap Core CSS -->
     <link href="{{asset('assets_admin/bower_components/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
 

@@ -2,13 +2,21 @@
 @section('content')
 <div class="col-xs-12 col-md-9"> 
 	<!-- main -->
+
 	<div class="template-customer">
 	  <h1>Đăng ký tài khoản</h1>
 	  <p>Nếu bạn chưa có tài khoản, hãy đăng ký ngay để nhận thông tin ưu đãi cùng những ưu đãi từ cửa hàng.</p>
 	  <div class="row" style="margin-top:50px;">
 	    <div class="col-md-6">
 	      <div class="wrapper-form">
-	        <form action="{{route('register.client')}}" method="post">
+	       @if(count($errors)>0)
+		        <div class="alert alert-danger">
+		            @foreach($errors->all() as $err)
+		               {{$err}}<br>
+		            @endforeach
+		        </div>
+		    @endif
+	        <form novalidate action="{{route('register.client')}}" method="post">
 	          @csrf
 	          <p class="title"><span>Đăng ký tài khoản</span></p>
 	          <div class="form-group">

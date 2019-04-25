@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $guarded = [
-        'id', 'passwordAgain', 'changePassword'
+        'id', 'passwordAgain', 'changePassword', 'changePass'
     ];
 
     public function role()

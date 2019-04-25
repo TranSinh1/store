@@ -25,6 +25,7 @@
                         <th>STT</th>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Date</th>
                         <th>Adress</th>
                         <th>Total Price</th>
                         <th>Number phone</th>
@@ -40,8 +41,9 @@
                         <td>{{$loop->iteration}}</td>
                         <td>{{$inv->name}}</td>
                         <td>{{$inv->email}}</td>
+                        <td>{{date_format($inv->created_at, 'd/m/y')}}</td>
                         <td>{{$inv->address}}</td>
-                        <td>{{$inv->total_price}}</td>
+                        <td><?php echo number_format($inv->total_price)." đ"; ?></td>
                         <td>{{$inv->phone}}</td>
                         <td>
                             {{$inv->paymethod->name}}

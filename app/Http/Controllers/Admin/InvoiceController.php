@@ -18,7 +18,7 @@ class InvoiceController extends Controller
 	}
     public function list(Request $request)
     {
-    	$invoice = $this->invoiceRepository->model()->paginate(config('customer.paginate.invoice'));
+    	$invoice = $this->invoiceRepository->model()->orderBy('id', 'desc')->paginate(config('customer.paginate.invoice'));
     	$keyword = $request->keyword;
     	if($keyword) {
     		$invoice = $this->invoiceRepository->model()->where('name', 'like', "%$keyword%")->paginate(config('customer.paginate.invoice'));
@@ -51,9 +51,8 @@ class InvoiceController extends Controller
 
     public function delete($id)
     {
-
     	$invoice = $this->invoiceRepository->find($id);
-    	 //dd($invoice->product);
+    	//dd($invoice->product);
     	if ($invoice) {
     		$invoice->product()->detach();
     	}

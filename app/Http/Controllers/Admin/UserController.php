@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Role;
 use App\Http\Requests\UserRequest;
+use App\Invoice;
 
 
 class UserController extends Controller
@@ -145,14 +146,13 @@ class UserController extends Controller
     	$image_old = $this->userRepository->find($id)->avatar;
   		//bo chuoi images/users/ khoi ten image de co the unlink
   		$image_old = str_replace("images/avatar/", '', $image_old);
-      if(!empty($image_old)) {
+        if(!empty($image_old)) {
     		//kiem tra ton tai cua file anh cu va xoa di
     		if(file_exists(public_path('images/avatar/'.$image_old)))
     			{
     				unlink(public_path('images/avatar/'.$image_old));
     			}
   		}
-
     	$this->userRepository->delete($id);
 
     	return redirect(route('list.user'))->with('alert', 'Bạn đã xóa thành công user');

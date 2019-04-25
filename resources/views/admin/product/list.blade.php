@@ -3,6 +3,9 @@
  <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row">
+            @if(session('alert'))
+                <div style="margin-top: 40px;" class="alert alert-success">{{session('alert')}}</div>
+            @endif
             <div class="col-lg-12">
                 <h1 class="page-header">Product
                     <small>List</small>
@@ -20,11 +23,10 @@
                     <tr align="center">
                         <th>STT</th>
                         <th>Name</th>
-                        <th>Description</th>
-                        <th>Detail</th>
                         <th>Price</th>
                         <th>Image</th>
                         <th>Category</th>
+                        <th>Quantity</th>
                         <th>Hot product</th>
                         <th>Delete</th>
                         <th>Edit</th>
@@ -35,13 +37,12 @@
                     <tr class="odd gradeX" align="center" id="{{$p->id}}">
                         <td>{{$loop->iteration}}</td>
                         <td>{{$p->name}}</td>
-                        <td>{{$p->desc}}</td>
-                        <td>{{$p->product_detail}}</td>
                         <td>{{$p->price}}</td>
                         <td>
                             <img width="50px" height="50px;" src="{{asset($p->image)}}">
                         </td>
                         <td>{{$p->category->name}}</td>
+                        <td>{{$p->quantity}}</td>
                         <td>
                             @if($p->hot_product == 1)
                                 <span class="glyphicon glyphicon-ok"></span>

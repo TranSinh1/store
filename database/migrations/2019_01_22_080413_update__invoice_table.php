@@ -27,6 +27,8 @@ class UpdateInvoiceTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('invoice', function (Blueprint $table) {
+            $table->dropColumn('status_id');
+        });
     }
 }

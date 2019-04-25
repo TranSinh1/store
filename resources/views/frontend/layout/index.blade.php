@@ -32,6 +32,7 @@
 <script src='assets_front/frontend/100/047/633/themes/517833/assets/jquery.min221b.js?1481775169361' type='text/javascript'></script>
 <script src='assets_front/frontend/100/047/633/themes/517833/assets/bootstrap.min221b.js?1481775169361' type='text/javascript'></script>
 <script src='assets_front/frontend/assets/themes_support/api.jquerya87f.js?4' type='text/javascript'></script>
+<script src="{{asset('assets_admin/js/information.js')}}"></script>
 <link href='assets_front/frontend/100/047/633/themes/517833/assets/bw-statistics-style221b.css?1481775169361' rel='stylesheet' type='text/css' />
 </head>
 <body class="index">
@@ -56,7 +57,7 @@
       </div>
     	@yield('content')
     <!-- adv -->
-    <div class="widebanner"> <a href="#"><img src="assets_front/frontend/100/047/633/themes/517833/assets/widebanner221b.jpg?1481775169361" alt="#" class="img-responsive"></a> </div>
+    <div class="widebanner"> <a href="javascript:;"><img src="assets_front/frontend/100/047/633/themes/517833/assets/widebanner221b.jpg?1481775169361" alt="#" class="img-responsive"></a> </div>
     <!-- end adv --> 
     <!-- home news -->
     <div class="home-blog">
@@ -70,7 +71,7 @@
                 <h3><a href="{{route('new.detail', ['id' => $new->id])}}">{{$new->name}}</a></h3>
                 <p class="time">{{$new->created_at}}</p>
                 <p class="desc">
-                <p style="text-align: justify;">{{$new->desc}}</p>
+                <p style="text-align: justify;">{!!$new->desc!!}</p>
               </div>
               <div style="clear:both"></div>
             </div>

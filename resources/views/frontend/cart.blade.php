@@ -9,7 +9,10 @@
 			               {{$err}}<br>
 			            @endforeach
 			        </div>
-			    @endif
+			@endif
+			@if(session('alert'))
+		    	<div class="alert alert-danger">{{session('alert')}}</div>
+			@endif
 		</div>
 		<!-- main -->
 		<div class="template-cart" >
@@ -61,7 +64,7 @@
 		  </form>
 		  <div class="total-cart"> Tổng tiền thanh toán: 
 		    <span class="total-price-cart"><?php echo number_format($totalPrice)."₫" ?></span><br>
-		    <a href="index.php?controller=checkout" class="button black">Thanh toán</a> </div>
+		    <a href="{{route('pay')}}" class="button black">Thanh toán</a> </div>
 		</div>
 		<!-- end main --> 
 	</div>

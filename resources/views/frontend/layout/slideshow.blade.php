@@ -9,18 +9,31 @@
               <div id="myCarousel" class="carousel slide" data-ride="carousel"> 
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
-                  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                  <li data-target="#myCarousel" data-slide-to="1"></li>
-                  <li data-target="#myCarousel" data-slide-to="2"></li>
-                  <li data-target="#myCarousel" data-slide-to="3"></li>
+                @php $i = 0; @endphp
+                @foreach($slide as $s)
+                  <li data-target="#myCarousel" data-slide-to="{{$i}}"
+                    @if($i == 0)
+                      class="active"
+                    @endif>
+                  </li>
+                  @php $i++; @endphp
+                @endforeach
                 </ol>
                 
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
-                  <div class="item active"> <img src="assets_front/frontend/images/la.jpg" alt="Los Angeles"> </div>
-                  <div class="item"> <img src="assets_front/frontend/images/slideshow1221b.jpg" alt="Los Angeles"> </div>
-                  <div class="item"> <img src="assets_front/frontend/images/chicago.jpg" alt="Chicago"> </div>
-                  <div class="item"> <img src="assets_front/frontend/images/ny.jpg" alt="New York"> </div>
+                @php $i = 0; @endphp
+                @foreach($slide as $s)
+                  <div style="width: 847px;height: 451px;" 
+                  @if($i==0)
+                    class="item active"
+                  @else
+                    class="item"
+                  @endif
+                    >
+                  @php $i++; @endphp
+                   <img width="847"  src="{{asset($s->image)}}" alt="Los Angeles"> </div>
+                @endforeach
                 </div>
                 
                 <!-- Left and right controls --> 

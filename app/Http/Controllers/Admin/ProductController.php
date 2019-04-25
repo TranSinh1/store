@@ -19,7 +19,7 @@ class ProductController extends Controller
     
     public function list(Request $request)
     {
-    	$products = $this->productRepository->model()->paginate(config('customer.paginate.product'));
+    	$products = $this->productRepository->model()->orderBy('id', 'desc')->paginate(config('customer.paginate.product'));
     	$keyword = $request->keyword;
     	if($keyword) {
     		$products = $this->productRepository->model()->where('name', 'like', "%$keyword%")->paginate(config('customer.paginate.product'));
@@ -106,7 +106,7 @@ class ProductController extends Controller
 
   		$this->productRepository->update($id, $data);
 
-  		return redirect(route('update.product', ['id' => $id]))->with('alert', 'Bạn đã sửa thành công');
+  		return redirect(route('list.product'))->with('alert', 'Bạn đã sửa thành công');
     }
 
     public function delete(Request $request)
@@ -114,13 +114,13 @@ class ProductController extends Controller
     	$image_old = $this->productRepository->find($request->id)->image;
   		//bo chuoi images/products/ khoi ten image de co the unlink
   		$image_old = str_replace("images/products/", '', $image_old);
-      if(!empty($image_old)) {
+        if(!empty($image_old)) {
     		//kiem tra ton tai cua file anh cu va xoa di
     		if(file_exists(public_path('images/products/'.$image_old)))
     			{
     				unlink(public_path('images/products/'.$image_old));
     			}
-  		}
-    	$this->productRepository->delete($request->id);
+      	}
+        $this->productRepository->delete($request->id);
     }
 }

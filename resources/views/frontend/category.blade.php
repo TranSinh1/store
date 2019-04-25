@@ -3,11 +3,19 @@
 <div class="col-xs-12 col-md-9"> 
           <!-- main -->
           <div class="special-collection">
+          @if(isset($category))
             <div class="tabs-container">
               <div class="clearfix">
                 <h2>{{$category->name}}</h2>
               </div>
             </div>
+          @else
+            <div class="tabs-container">
+              <div class="clearfix">
+                <h2>Kết quả tìm kiếm</h2>
+              </div>
+            </div>
+          @endif
             <div class="tabs-content row">
               <div id="content-tabb1" class="content-tab content-tab-proindex" style="">
                 <div class="clearfix"> 

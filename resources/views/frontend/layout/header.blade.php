@@ -14,7 +14,7 @@
         @if(!Auth::check())
           <div class="col-xs-12 col-sm-6 col-md-6 customer"> <a href="{{route('login.client')}}"><i class="fa fa-user"></i> Đăng nhập</a> <a href="{{route('register.client')}}"><i class="fa fa-user-plus"></i> Đăng ký</a> </div>
         @else
-          <div class="col-xs-12 col-sm-6 col-md-6 customer"> <a href="{{route('login.client')}}"><i class="fa fa-user"></i>{{Auth::user()->name}}</a> <a href="{{route('logout.client')}}"><i class="fa fa-user-plus"></i> Đăng xuất</a> </div>
+          <div class="col-xs-12 col-sm-6 col-md-6 customer"> <a href="{{route('information')}}"><i class="fa fa-user"></i>{{Auth::user()->name}}</a> <a href="{{route('list-order')}}"><i class=""></i>Đơn hàng</a> <a href="{{route('logout.client')}}"><i class="fa fa-user-plus"></i> Đăng xuất</a> </div>
         @endif
       </div>
     </div>
@@ -24,15 +24,15 @@
   <div class="mid-header">
     <div class="container">
       <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-3 logo "> <a href="index.html"> <img src="assets_front/frontend/100/047/633/themes/517833/assets/logo221b.png?1481775169361" alt="DKT Store" title="DKT Store" class="img-responsive"> </a> </div>
+        <div class="col-xs-12 col-sm-12 col-md-3 logo "> <a href="{{route('home.page')}}"> <img src="assets_front/frontend/100/047/633/themes/517833/assets/logo221b.png?1481775169361" alt="DKT Store" title="DKT Store" class="img-responsive"> </a> </div>
         <div class="col-xs-12 col-sm-12 col-md-6 header-search">
-          <form method="get" action="search">
-            <input type="text" value="" placeholder="Nhập từ khóa tìm kiếm..." name="query" class="input-control">
+          <form method="get" action="">
+            <input type="text" value="" placeholder="Nhập từ khóa tìm kiếm..." name="search" class="input-control">
             <button  type="submit"> <i class="fa fa-search"></i> </button>
           </form>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-3 mini-cart">
-          <div class="wrapper-mini-cart"> <span class="icon"><i class="fa fa-shopping-cart"></i></span> <a href="cart"> <span class="mini-cart-count" id="mini-cart">{{$totalItem}}</span> sản phẩm <i class="fa fa-caret-down"></i></a>
+          <div class="wrapper-mini-cart"> <span class="icon"><i class="fa fa-shopping-cart"></i></span> <a href="{{route('view.cart')}}"> <span class="mini-cart-count" id="mini-cart">{{$totalItem}}</span> sản phẩm <i class="fa fa-caret-down"></i></a>
             <div class="content-mini-cart">
                 <ul class="list-unstyled list-cart-mini">
                 @php
@@ -53,7 +53,7 @@
                 @endforeach
                 </ul>
                 <div class="total clearfix"> <span class="pull-left">Tổng tiền:</span> <span class="pull-right total-price">@php echo number_format($totalPrice)." ₫"; @endphp</span> </div>
-                <a href="{{route('view.cart')}}" class="button">Thanh toán</a>
+                <a href="{{route('pay')}}" class="button">Thanh toán</a>
             </div>
           </div>
         </div>
@@ -66,11 +66,11 @@
     <div class="container">
       <div class="clearfix">
         <ul class="main-nav hidden-xs hidden-sm list-unstyled">
-          <li class="active"><a href="{{asset(route('home.page'))}}">Trang chủ</a></li>
-          <li ><a href="gioi-thieu">Giới thiệu</a></li>
-          <li ><a href="gioi-thieu">Sản phẩm</a></li>
+          <li class="active"><a href="{{route('home.page')}}">Trang chủ</a></li>
+          <li ><a href="{{route('introduce')}}">Giới thiệu</a></li>
+          <li ><a href="{{route('product.page')}}">Sản phẩm</a></li>
           <li ><a href="{{route('new')}}">Tin tức</a></li>
-          <li ><a href="lien-he">Liên hệ</a></li>
+         <!--  <li ><a href="lien-he">Liên hệ</a></li> -->
         </ul>
         <a href="javascript:void(0);" class="toggle-main-menu hidden-md hidden-lg"> <i class="fa fa-bars"></i> </a>
         <ul class="list-unstyled mobile-main-menu hidden-md hidden-lg" style="display:none">

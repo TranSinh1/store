@@ -48,11 +48,11 @@
         <div class="col-xs-12 col-sm-5"> © Bản quyền thuộc về Avent Team</div>
         <div class="col-xs-12 col-sm-7">
           <ul class="list-unstyled">
-            <li><a href="index.html">Trang chủ</a></li>
-            <li><a href="gioi-thieu">Giới thiệu</a></li>
-            <li><a href="collections/all">Sản phẩm</a></li>
-            <li><a href="tin-tuc">Tin tức</a></li>
-            <li><a href="lien-he">Liên hệ</a></li>
+            <li><a href="{{route('home.page')}}">Trang chủ</a></li>
+            <li><a href="{{route('introduce')}}">Giới thiệu</a></li>
+            <li><a href="{{route('product.page')}}">Sản phẩm</a></li>
+            <li><a href="{{route('new')}}">Tin tức</a></li>
+            <!-- <li><a href="lien-he">Liên hệ</a></li> -->
           </ul>
         </div>
       </div>

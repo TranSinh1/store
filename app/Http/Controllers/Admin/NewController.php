@@ -18,7 +18,7 @@ class NewController extends Controller
 
 	public function list(Request $request)
     {
-    	$news = $this->newRepository->model()->paginate(config('customer.paginate.new'));
+    	$news = $this->newRepository->model()->orderBy('id', 'desc')->paginate(config('customer.paginate.new'));
     	$keyword = $request->keyword;
     	if($keyword) {
     		$news = $this->newRepository->model()->where('name', 'like', "%$keyword%")->paginate(config('customer.paginate.new'));

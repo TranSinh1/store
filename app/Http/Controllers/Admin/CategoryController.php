@@ -8,6 +8,7 @@ use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Http\Requests\CategoryRequest;
 use App\Http\Requests\UpdateCateRequest;
 use Illuminate\Support\Str;
+use App\Product;
 
 class CategoryController extends Controller
 {
@@ -67,5 +68,8 @@ class CategoryController extends Controller
     public function delete(Request $request)
     {
     	$this->categoryRepository->delete($request->id);
+        $products = Product::where('category_id', $request->id);
+        $products->delete();
     }
 }
+

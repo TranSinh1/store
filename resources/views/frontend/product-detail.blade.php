@@ -21,8 +21,8 @@
               </div>
               <div class="col-xs-12 col-md-6 info">
                 <h1 itemprop="name">{{$product->name}}</h1>
-                <p class="sku">Mã sản phẩm:&nbsp; <span></span></p>
-                <p class="vendor">Nhà sản xuất:&nbsp; <span>MICROSOFT</span></p>
+              <!--   <p class="sku">Mã sản phẩm:&nbsp; <span></span></p>
+                <p class="vendor">Nhà sản xuất:&nbsp; <span>MICROSOFT</span></p> -->
                 <p itemprop="price" class="price-box product-price-box"> <span class="special-price"> <span class="price product-price">@php echo number_format($product->price)." ₫";@endphp </span> </span> </p>
                 <p class="desc rte"> {!!$product->desc!!}</p>
                 <!-- <form action="{{route('cart.add')}}"  method="post" enctype="multipart/form-data" class="product-form">

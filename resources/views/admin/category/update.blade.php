@@ -30,6 +30,23 @@
                                 <label>Category Description</label>
                                 <textarea class="form-control" name="desc" rows="3" placeholder="Please Enter Category Description">{{$cate->desc}}</textarea>
                             </div>
+                             <div class="form-group">
+                                <label>Hot category</label>
+                                <label class="radio-inline">
+                                    <input name="hot_cate" 
+                                    @if($cate->hot_cate == 1)  
+                                        {{"checked"}}
+                                    @endif 
+                                    value="1" type="radio">Hot
+                                </label>
+                                <label class="radio-inline">
+                                    <input name="hot_cate"
+                                    @if($cate->hot_cate != 1)  
+                                        {{"checked"}}
+                                    @endif 
+                                     value="0" type="radio">Not hot
+                                </label>
+                            </div>
                             <button type="submit" class="btn btn-success">Update Category</button>
                             <button type="reset" class="btn btn-danger">Reset</button>
                         

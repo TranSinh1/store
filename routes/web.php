@@ -19,6 +19,8 @@ Route::get('home-page', 'HomepageController@homePage')->name('home.page');
 
 Route::get('category/{id}', 'HomepageController@category')->name('category');
 
+Route::get('product', 'HomepageController@product')->name('product.page');
+
 Route::get('product-detail/{id}', 'HomepageController@productDetail')->name('product');
 
 Route::get('new', 'HomepageController@new')->name('new');
@@ -45,9 +47,24 @@ Route::get('logout-client', 'LoginLogoutController@logoutClient')->name('logout.
 Route::get('register-client', 'LoginLogoutController@getRegisterClient')->name('register.client');
 Route::post('register-client', 'LoginLogoutController@registerClient');
 
+Route::get('pay', 'CartController@getPay')->name('pay');
+Route::post('pay', 'CartController@postPay');
+
+Route::get('introduce', 'HomepageController@getIntroduce')->name('introduce');
+
+//Danh sách đơn hàng người dùng
+Route::get('list-order', 'HomepageController@listOrder')->name('list-order');
+//Sửa thông tin người dùng
+Route::get('information', 'HomepageController@viewInformation')->name('information');
+Route::post('information/{id}', 'HomepageController@UpdateInfor')->name('update.infor');
 
 //Route admin
 Route::group(['prefix' => 'admin', 'middleware' => 'check.admin'], function() {
+
+	Route::get('home-admin', 'Admin\HomeAdminController@index')->name('home.admin');
+	Route::get('home-admin/getdata-doughnut/{year}', 'Admin\HomeAdminController@getDataDoughnut');
+	Route::get('home-admin/year', 'Admin\HomeAdminController@getYear');
+	Route::get('home-admin/getdata-line/{year}', 'Admin\HomeAdminController@getDataLine');
 
 	Route::group(['prefix'=>'category'], function() {
 
@@ -110,4 +127,34 @@ Route::group(['prefix' => 'admin', 'middleware' => 'check.admin'], function() {
 
 		Route::get('delete/{id}', 'Admin\InvoiceController@delete')->name('del.invoice');
 	});
+
+	Route::group(['prefix'=>'slide'], function() {
+
+		Route::get('list', 'Admin\SlideController@list')->name('list.slide');
+
+		Route::get('create', 'Admin\SlideController@getCreate')->name('create.slide');
+		Route::post('create', 'Admin\SlideController@postCreate');
+
+		Route::get('update/{id}', 'Admin\SlideController@getUpdate')->name('update.slide');
+		Route::post('update/{id}', 'Admin\SlideController@postUpdate');
+
+		Route::get('delete/{id}', 'Admin\SlideController@delete')->name('del.slide');
+	});
+
+	Route::group(['prefix'=>'status'], function() {
+
+		Route::get('list', 'Admin\StatusController@list')->name('list.status');
+
+		Route::get('create', 'Admin\StatusController@getCreate')->name('create.status');
+		Route::post('create', 'Admin\StatusController@postCreate');
+
+		Route::get('update/{id}', 'Admin\StatusController@getUpdate')->name('update.status');
+		Route::post('update/{id}', 'Admin\StatusController@postUpdate');
+
+		Route::get('delete/{id}', 'Admin\StatusController@delete')->name('del.status');
+	});
 });
+
+Route::get('pay-success', function() {
+	return view('frontend.pay-success');
+})->name('pay.success');

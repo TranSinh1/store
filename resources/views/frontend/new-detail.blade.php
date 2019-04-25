@@ -6,10 +6,10 @@
 		<div style="text-align: center;"><img src="{{asset($new->image)}}" style="max-width: 600px;"></div>
         <div class="rte">
           <p style="text-align: justify;">
-          {{$new->desc}}
+          {!!$new->desc!!}
           </p>
           <p style="text-align: justify;">
-          {{$new->new_detail}}
+          {!!$new->new_detail!!}
           </p>
         </div>
     </div>

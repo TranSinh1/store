@@ -9,7 +9,7 @@
             <div class="info">
               <h3><a href="{{route('new.detail', ['id' => $new->id])}}">{{$new->name}}</a></h3>
               <p class="time">{{$new->created_at}}</p>
-              <p class="desc">{{$new->desc}}</p>
+              <p class="desc">{!!$new->desc!!}</p>
             </div>
           </div>
         </div>

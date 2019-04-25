@@ -24,8 +24,6 @@
                     <tr align="center">
                         <th>STT</th>
                         <th>Name</th>
-                        <th>Description</th>
-                        <th>Detail</th>
                         <th>Image</th>
                         <th>Hot new</th>
                         <th>Delete</th>
@@ -37,8 +35,6 @@
                     <tr class="odd gradeX" align="center" id="{{$n->id}}">
                         <td>{{$loop->iteration}}</td>
                         <td>{{$n->name}}</td>
-                        <td>{{$n->desc}}</td>
-                        <td>{{$n->new_detail}}</td>
                         <td>
                             <img width="50px" height="50px;" src="{{asset($n->image)}}">
                         </td>
@@ -48,7 +44,7 @@
                             @endif
                         </td>
                         <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{asset(route('del.new', ['id' => $n->id]))}}" class="btn-remove_{{$n->id}}" onclick="return window.confirm('Are you sure?');"> Delete</a></td>
-                        <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('update.new', ['id' => $n->id])}}">Update</a></td>
+                        <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('update.new', ['id' => $n->id])}}" onclick="return window.confirm('Ban co muon sua khong?');">Update</a></td>
                     </tr>
                 @endforeach
                 </tbody>

@@ -30,4 +30,12 @@ class UserRequest extends FormRequest
             'passwordAgain' => 'required|same:password',
         ];
     }
+    
+    public function messages()
+    {
+        return [
+            'name.required' => 'Không được để trống',
+            
+        ];
+    }
 }

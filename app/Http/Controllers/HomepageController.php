@@ -6,23 +6,38 @@ use Illuminate\Http\Request;
 use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Repositories\Product\ProductRepositoryInterface;
 use App\Repositories\NewRepository\NewRepositoryInterface;
+use App\Repositories\User\UserRepositoryInterface;
+use App\Invoice;
+use App\InvoiceDetail;
+use App\User;
+use Auth;
 
 class HomepageController extends Controller
 {
     protected $categoryRepository;
     protected $productRepository;
     protected $newRepository;
-    public function __construct(CategoryRepositoryInterface $categoryRepository, ProductRepositoryInterface $productRepository, NewRepositoryInterface $newRepository)
+    protected $userRepository;
+    public function __construct(UserRepositoryInterface $userRepository, CategoryRepositoryInterface $categoryRepository, ProductRepositoryInterface $productRepository, NewRepositoryInterface $newRepository)
     {
     	$this->categoryRepository = $categoryRepository;
     	$this->productRepository = $productRepository;
     	$this->newRepository = $newRepository;
+        $this->userRepository = $userRepository;
     }
-    public function homePage()
+    public function homePage(Request $request)
     {
     	$categories = $this->categoryRepository->getAll();
-        $hot_product = $this->productRepository->model()->where('hot_product', 1)->orderBy('id', 'desc')->paginate(8);
-        $new_product = $this->productRepository->model()->orderBy('id', 'desc')->paginate(8)->take(16);
+        $hot_product = $this->productRepository->model()->where('hot_product', 1)->orderBy('id', 'desc')->paginate(config('customer.paginate.product-front'));
+        $keyword = $request->search;
+        if($keyword) {
+            $products = $this->productRepository->model()->where('name', 'like', "%$keyword%")->paginate(config('customer.paginate.product-front'));
+            $products->setPath(route('home.page'));
+            $products->withPath('?keyword=' . $keyword);
+
+            return view('frontend.category', compact('products'));
+        }
+        $new_product = $this->productRepository->model()->orderBy('id', 'desc')->paginate(config('customer.paginate.product-front'))->take(16);
     	return view('frontend.homePage', compact('categories', 'hot_product', 'new_product'));
     }
     public function category($id)
@@ -50,9 +65,24 @@ class HomepageController extends Controller
 
         return view('frontend.product-detail', compact('product'));
     }
-    public function new()
+    public function new(Request $request)
     {
-        $news = $this->newRepository->model()->orderBy('id', 'desc')->paginate(4);
+        $news = $this->newRepository->model()
+                                        ->where('hot_new', 1)
+                                        ->orderBy('id', 'desc')
+                                        ->paginate(config('customer.paginate.new-front'));
+        $keyword = $request->search;
+        if($keyword) {
+            $news = $this->newRepository->model()->where('name', 'like', "%$keyword%")
+                                                ->where('hot_new', 1)
+                                                ->orderBy('id', 'desc')
+                                                ->paginate(config('customer.paginate.new-front'));
+            $news->setPath(route('new'));
+            $news->withPath('?keyword=' . $keyword);
+
+            return view('frontend.new', compact('news'));
+        }
+
         return view('frontend.new', compact('news'));
     }
     public function newDetail($id)
@@ -135,5 +165,115 @@ class HomepageController extends Controller
         }
 
         return response()->json(['totalItem' => $totalItem, 'totalPrice' => $totalPrice, 'data' => $cart]);
+    }
+
+    public function getIntroduce()
+    {
+        return view('frontend.introduce');
+    }
+
+    public function product(Request $request)
+    {
+        $products = $this->productRepository->model()->orderBy('id', 'desc')->paginate(config('customer.paginate.product-front'));
+        $keyword = $request->search;
+        if($keyword) {
+            $products = $this->productRepository->model()->where('name', 'like', "%$keyword%")->paginate(config('customer.paginate.product-front'));
+            $products->setPath(route('product.page'));
+            $products->withPath('?keyword=' . $keyword);
+
+            return view('frontend.product', compact('products'));
+        }
+
+        return view('frontend.product', compact('products'));
+    }
+
+    public function viewInformation()
+    {
+        if(Auth::check()) {
+            $user = Auth()->user();
+
+            return view('frontend.information', compact('user'));
+        }
+    }
+
+     public  function UpdateInfor(Request $request, $id)
+    {
+        $data = $request->all();
+        $image_old = $this->userRepository->find($id)->avatar;
+        //bo chuoi images/users/ khoi ten image de co the unlink
+        $image_old = str_replace("images/avatar/", '', $image_old);
+
+        if($request->hasFile('avatar')) {
+            $this->validate($request,
+                [
+                    'avatar' => 'image'
+                ],
+                [
+                    'avatar.image' => 'Not file image'
+                ]);
+        if (!empty($image_old)) {
+                //kiem tra file anh va xoa anh trong folder
+                if(file_exists(public_path('images/avatar/'.$image_old)))
+                {
+                    unlink(public_path('images/avatar/'.$image_old));
+                }
+        }
+
+            $file = $request->avatar;
+
+            $name_image = uniqid()."_".$file->getClientOriginalName();
+
+            $path = $file->storeAs('images/avatar', $name_image);
+
+            $data['avatar'] = $path;
+            
+        }
+
+        if ($request->changePass == "on") {
+            $data['password'] = bcrypt($request->password);
+            $this->validate($request,
+            [
+                'password'=>'required|min:6|max:32',
+                'passwordAgain'=>'required|same:password'
+            ],
+            [
+                'password.required'=>'Bạn chưa nhập password',
+                'password.min'=>'Password phải có ít nhất 3 ký tự',
+                'password.max'=>'Password có nhiều nhất 32 ký tự',
+                'passwordAgain.required'=>'Bạn chưa nhập lại password',
+                'passwordAgain.same'=>'Nhập lại password không chính xác'
+            ]);
+        }
+        $this->validate($request,
+                [
+                    'name' => 'required|min:3|max:32',
+                    'address' => 'required'
+                ],
+                [
+                    'name.required' => 'Tên không được bỏ trống',
+                    'name.min' => 'Tên chỉ ít nhất có 3 ký tự',
+                    'name.max' => 'Tên nhiều nhất có 32 ký tự',
+                    'address.required' => 'Địa chỉ không được để trống'
+                ]);
+        $this->userRepository->update($id, $data);
+
+        return redirect(route('information'))->with('alert', 'Bạn đã sửa thành công');
+    }
+
+    public function listOrder()
+    {
+        if(Auth::check()) {
+            $user = User::find(Auth()->user()->id);
+            $invoice = $user->invoice;
+           // foreach ($invoice as $key => $value) {
+            
+           //     foreach ($invoice->product as $key => $v->pivot) {
+           //         echo $v['id'];
+           //     }
+           // }
+            
+        }   
+
+        return view('frontend.list-order', compact(['invoice']));
     }
 }

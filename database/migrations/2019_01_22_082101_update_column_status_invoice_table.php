@@ -25,6 +25,6 @@ class UpdateColumnStatusInvoiceTable extends Migration
      */
     public function down()
     {
-        //
+        
     }
 }

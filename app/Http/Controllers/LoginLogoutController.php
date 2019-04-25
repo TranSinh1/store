@@ -30,7 +30,7 @@ class LoginLogoutController extends Controller
     {
     	if(Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
 
-    		return redirect(route('list.cate'));
+    		return redirect(route('home.admin'));
     	}
     	else {
 

@@ -30,6 +30,15 @@
                                 <label>Category Description</label>
                                 <textarea class="form-control" name="desc" rows="3" placeholder="Please Enter Category Description"></textarea>
                             </div>
+                            <div class="form-group">
+                                <label>Hot category</label>
+                                <label class="radio-inline">
+                                    <input name="hot_cate" value="1" type="radio">Hot
+                                </label>
+                                <label class="radio-inline">
+                                    <input name="hot_cate" value="0" type="radio">Not hot
+                                </label>
+                            </div>
                             <button type="submit" class="btn btn-success">Category Add</button>
                             <button type="reset" class="btn btn-danger">Reset</button>
                         

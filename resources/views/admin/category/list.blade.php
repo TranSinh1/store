@@ -22,6 +22,7 @@
                         <th>Name</th>
                         <th>Slug</th>
                         <th>Description</th>
+                        <th>Hot category</th>
                         <th>Delete</th>
                         <th>Edit</th>
                     </tr>
@@ -33,6 +34,11 @@
                         <td>{{$cate->name}}</td>
                         <td>{{$cate->slug}}</td>
                         <td>{{$cate->desc}}</td>
+                        <td>
+                            @if($cate->hot_cate == 1)
+                                <span class="glyphicon glyphicon-ok"></span>
+                            @endif
+                        </td>
                         <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="javascript:void(0);" class="btn-remove_{{$cate->id}}"  onclick="deleteAjax({{$cate->id}})"> Delete</a></td>
                         <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('update.cate', ['id' => $cate->id])}}">Update</a></td>
                     </tr>
